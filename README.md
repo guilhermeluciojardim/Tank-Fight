@@ -24,7 +24,7 @@
 - [ ] Project Optimization
 - [ ] Build Project
 
-##  🎮 When the game it is playable, the link will be provided here..
+##  🎮 When the game get playable, the link will be provided here..
 
 https://
 
