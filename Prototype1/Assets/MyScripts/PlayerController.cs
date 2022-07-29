@@ -15,13 +15,21 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    
+       StartAim();
     }
     // Update is called once per frame
     void Update()
     {   
         Aim();
 
+    }
+
+    void StartAim(){
+        Vector3 resetAngles = new Vector3 (0,-90,0);
+        turret.transform.rotation = Quaternion.Euler(resetAngles);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
     }
     //Function for aim the Turret
     private void Aim(){
