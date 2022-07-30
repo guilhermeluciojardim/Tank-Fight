@@ -25,15 +25,12 @@ public class PlayerController : MonoBehaviour
     }
 
     void StartAim(){
-        Vector3 resetAngles = new Vector3 (0,-90,0);
-        turret.transform.rotation = Quaternion.Euler(resetAngles);
-
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.lockState = CursorLockMode.None;
+
     }
     //Function for aim the Turret
     private void Aim(){
-        verticalAxis = Input.GetAxis("Vertical");
+        verticalAxis = Input.GetAxis("Vertical1");
         turret.transform.Rotate(Vector3.left, verticalAxis * turretSpeed * Time.deltaTime);
         LimitRot();
     }

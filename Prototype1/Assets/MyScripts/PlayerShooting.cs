@@ -40,7 +40,6 @@ public class PlayerShooting : MonoBehaviour
             currentCharge = minCharge;
             shootingAudio.clip = chargeClip;
             shootingAudio.Play();
-            Debug.Log("Carregando");
         }
         else if ((Input.GetKey(KeyCode.Space)) && (!fired)){
             currentCharge += chargeSpeed * Time.deltaTime;
@@ -60,6 +59,7 @@ public class PlayerShooting : MonoBehaviour
                 Instantiate (shellPrefab, shootTransform.position, shootTransform.rotation) as Rigidbody;
         shellInst.velocity = currentCharge * shootTransform.forward;
         
+
         currentCharge = minCharge;
     }
     
