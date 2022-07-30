@@ -12,10 +12,10 @@
 
 ### Next ajusts and improvements
 
-- [ ] Set cameras around the scene
-- [ ] Create player controler and aim
-- [ ] Create firing system
-- [ ] Create wind system
+- [x] Set cameras around the scene
+- [x] Create player controler and aim
+- [x] Create firing system
+- [x] Create wind system
 - [ ] Manage health system
 - [ ] Create AI for shooting back
 - [ ] Create Game Menu
