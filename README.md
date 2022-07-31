@@ -17,7 +17,7 @@
 - [x] Create firing system
 - [x] Create wind system
 - [ ] Manage health system
-- [ ] Create AI for shooting back
+- [ ] Create player 1 e 2 control
 - [ ] Create Game Menu
 - [ ] Create dificculty level
 - [ ] Fix last bugs
