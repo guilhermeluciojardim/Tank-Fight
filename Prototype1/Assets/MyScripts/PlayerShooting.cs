@@ -19,6 +19,7 @@ public class PlayerShooting : MonoBehaviour
     public Transform shootTransform;
 
     public Rigidbody shellPrefab; 
+    public bool isTurn;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +44,6 @@ public class PlayerShooting : MonoBehaviour
         }
         else if ((Input.GetKey(KeyCode.Space)) && (!fired)){
             currentCharge += chargeSpeed * Time.deltaTime;
-            Debug.Log(currentCharge);
             chargeSlider.value = currentCharge;
         }
         else if ((Input.GetKeyUp(KeyCode.Space)) && (!fired)){
