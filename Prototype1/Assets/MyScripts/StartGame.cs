@@ -34,6 +34,7 @@ public class StartGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Set the first random player
         if ((gameStarted) && (!setFirstPlayer)){
             SetFirstRandomPlayer();
         }
