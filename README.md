@@ -17,9 +17,8 @@
 - [x] Create firing system
 - [x] Create wind system
 - [ ] Manage health system
-- [ ] Create player 1 e 2 control
-- [ ] Create Game Menu
-- [ ] Create dificculty level
+- [x] Create player 1 e 2 control
+- [x] Create Game Menu
 - [ ] Fix last bugs
 - [ ] Project Optimization
 - [ ] Build Project
