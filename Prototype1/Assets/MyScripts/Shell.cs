@@ -7,6 +7,10 @@ public class Shell : MonoBehaviour
     public bool inWindZone = false;
     public GameObject windZone;
     public ParticleSystem shellExplosionPrefab;
+    public ParticleSystem tankExplosionPrefab;
+    public GameObject destroyedTankPrefab;
+    public GameObject manager;
+    
 
     Rigidbody rb;
     // Start is called before the first frame update
@@ -32,10 +36,17 @@ public class Shell : MonoBehaviour
             windZone = coll.gameObject;
             inWindZone = true;
         }
-         if (coll.gameObject.tag == "Obstacle"){
+        if (coll.gameObject.tag == "Obstacle"){
             Instantiate(shellExplosionPrefab,transform.position,transform.rotation);
             StartCoroutine(WaitForExplosion(2f));
             Destroy(gameObject);
+        }
+        if (coll.gameObject.tag == "Player"){
+            Instantiate(shellExplosionPrefab,transform.position,transform.rotation);
+            StartCoroutine(WaitForExplosion(2f));
+            Destroy(gameObject);
+            Instantiate(destroyedTankPrefab,coll.transform.position,coll.transform.rotation);
+            Destroy(coll.gameObject);
         }
     }
 

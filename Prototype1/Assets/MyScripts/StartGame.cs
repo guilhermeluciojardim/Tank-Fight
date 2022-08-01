@@ -25,6 +25,8 @@ public class StartGame : MonoBehaviour
     public bool gameStarted = false;
     public bool setFirstPlayer = false;
 
+    public bool gameEnds=false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,8 +45,14 @@ public class StartGame : MonoBehaviour
                 if (player1Shooting.finishShoot){
                     if (player1Shooting.ready){
                         player1Shooting.finishShoot = false;
-                        SetPlayer2();
-                        ChangeWind();
+                        if (gameEnds){
+                            RestartRound("Blue");
+                        }
+                        else{
+                            SetPlayer2();
+                            ChangeWind();
+                        }
+                        
                     }
                 }
             }
@@ -52,12 +60,28 @@ public class StartGame : MonoBehaviour
                 if (player2Shooting.finishShoot){
                     if (player2Shooting.ready){
                         player2Shooting.finishShoot = false;
-                        SetPlayer1();
-                        ChangeWind();
+                        if (gameEnds){
+                            RestartRound("Red");
+                        }
+                        else{
+                            SetPlayer1();
+                            ChangeWind();
+                        }
+                        
                     }
                 }
             }
         }
+    }
+    void RestartRound(string winner){
+        setTurn.text = winner + " Wins!!!";
+        gameStarted=false;
+        setFirstPlayer=false;
+        startButton.gameObject.SetActive(true);
+        swapAudio = GetComponent<AudioSource>().clip;
+        GetComponent<AudioSource>().clip = otherAudio;
+        GetComponent<AudioSource>().Play();
+        GetComponent<AudioSource>().volume = 1.0f;
     }
     void ChangeWind(){
         wind.strength = Random.Range(minWindStrength,maxWindStrength);

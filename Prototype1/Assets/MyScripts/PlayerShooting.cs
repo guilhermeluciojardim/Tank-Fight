@@ -20,6 +20,7 @@ public class PlayerShooting : MonoBehaviour
     public bool isTurn = false;
     public bool finishShoot = false;
     public bool ready=true;
+    public bool isHit = false;
     // Start is called before the first frame update
     void Start()
     {
