@@ -11,11 +11,14 @@ public class PlayerController : MonoBehaviour
     private float turretSpeed = 10f;
     private float minRotation = -50f;
     private float maxRotation = 10f;
+    public AudioClip moveAudio;
+    private bool pressed = false;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-       StartAim();
+       
     }
     // Update is called once per frame
     void Update()
@@ -24,14 +27,20 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void StartAim(){
-        Cursor.lockState = CursorLockMode.Locked;
-
-    }
     //Function for aim the Turret
     private void Aim(){
         verticalAxis = Input.GetAxis("Vertical1");
         turret.transform.Rotate(Vector3.left, verticalAxis * turretSpeed * Time.deltaTime);
+        if ((Input.GetAxis("Vertical1")>0) && (!pressed)){
+            GetComponent<AudioSource>().clip = moveAudio;
+            GetComponent<AudioSource>().volume = 0.35f;
+            GetComponent<AudioSource>().Play();
+            pressed=true;
+        }
+        if (Input.GetAxis("Vertical1")==0){
+            GetComponent<AudioSource>().Stop();
+            pressed=false;
+        }
         LimitRot();
     }
     //Function for limiting the rotation of the turret

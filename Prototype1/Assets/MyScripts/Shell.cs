@@ -6,6 +6,7 @@ public class Shell : MonoBehaviour
 {
     public bool inWindZone = false;
     public GameObject windZone;
+    public ParticleSystem shellExplosionPrefab;
 
     Rigidbody rb;
     // Start is called before the first frame update
@@ -31,6 +32,11 @@ public class Shell : MonoBehaviour
             windZone = coll.gameObject;
             inWindZone = true;
         }
+         if (coll.gameObject.tag == "Obstacle"){
+            Instantiate(shellExplosionPrefab,transform.position,transform.rotation);
+            StartCoroutine(WaitForExplosion(2f));
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerExit(Collider coll){
@@ -38,4 +44,8 @@ public class Shell : MonoBehaviour
             inWindZone = false;
         }
     }
+    IEnumerator WaitForExplosion(float time){
+        yield return new WaitForSeconds(time); 
+   }
+  
 }
