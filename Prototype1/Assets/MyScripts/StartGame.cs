@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -20,11 +21,11 @@ public class StartGame : MonoBehaviour
     public PlayerShooting player1Shooting;
     public PlayerShooting player2Shooting;
     public AudioClip otherAudio;
-    private AudioClip swapAudio;
+    public AudioClip swapAudio;
     public Button startButton;
+    public Button restartButton;
     public bool gameStarted = false;
     public bool setFirstPlayer = false;
-
     public bool gameEnds=false;
 
     // Start is called before the first frame update
@@ -45,8 +46,11 @@ public class StartGame : MonoBehaviour
                 if (player1Shooting.finishShoot){
                     if (player1Shooting.ready){
                         player1Shooting.finishShoot = false;
-                        if (gameEnds){
-                            RestartRound("Blue");
+                        if (player1Shooting.isHit){
+                            FinishRound("Red");
+                        }
+                        else if(player2Shooting.isHit){
+                            FinishRound("Blue");
                         }
                         else{
                             SetPlayer2();
@@ -60,8 +64,11 @@ public class StartGame : MonoBehaviour
                 if (player2Shooting.finishShoot){
                     if (player2Shooting.ready){
                         player2Shooting.finishShoot = false;
-                        if (gameEnds){
-                            RestartRound("Red");
+                        if (player1Shooting.isHit){
+                            FinishRound("Red");
+                        }
+                        else if(player2Shooting.isHit){
+                            FinishRound("Blue");
                         }
                         else{
                             SetPlayer1();
@@ -72,16 +79,31 @@ public class StartGame : MonoBehaviour
                 }
             }
         }
+        
     }
-    void RestartRound(string winner){
+    void FinishRound(string winner){
         setTurn.text = winner + " Wins!!!";
         gameStarted=false;
         setFirstPlayer=false;
-        startButton.gameObject.SetActive(true);
-        swapAudio = GetComponent<AudioSource>().clip;
-        GetComponent<AudioSource>().clip = otherAudio;
+        if (winner == "Blue"){
+            player2Shooting.gameObject.SetActive(false);
+        }
+        else{
+            player1Shooting.gameObject.SetActive(false);
+        }
+        AudioSwap();
         GetComponent<AudioSource>().Play();
         GetComponent<AudioSource>().volume = 1.0f;
+        restartButton.gameObject.SetActive(true);
+
+    }
+    public void RestartScene(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    void AudioSwap(){
+        swapAudio = GetComponent<AudioSource>().clip;
+        GetComponent<AudioSource>().clip = otherAudio;
+        otherAudio = swapAudio;
     }
     void ChangeWind(){
         wind.strength = Random.Range(minWindStrength,maxWindStrength);
@@ -114,8 +136,7 @@ public class StartGame : MonoBehaviour
     public void SetGame(){
         gameStarted = true;
         startButton.gameObject.SetActive(false);
-        swapAudio = GetComponent<AudioSource>().clip;
-        GetComponent<AudioSource>().clip = otherAudio;
+        AudioSwap();
         GetComponent<AudioSource>().Play();
         GetComponent<AudioSource>().volume = 0.3f;
     }

@@ -9,7 +9,6 @@ public class Shell : MonoBehaviour
     public ParticleSystem shellExplosionPrefab;
     public ParticleSystem tankExplosionPrefab;
     public GameObject destroyedTankPrefab;
-    public GameObject manager;
     
 
     Rigidbody rb;
@@ -44,9 +43,8 @@ public class Shell : MonoBehaviour
         if (coll.gameObject.tag == "Player"){
             Instantiate(shellExplosionPrefab,transform.position,transform.rotation);
             StartCoroutine(WaitForExplosion(2f));
-            Destroy(gameObject);
             Instantiate(destroyedTankPrefab,coll.transform.position,coll.transform.rotation);
-            Destroy(coll.gameObject);
+            Destroy(gameObject);
         }
     }
 

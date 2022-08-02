@@ -21,6 +21,7 @@ public class PlayerShooting : MonoBehaviour
     public bool finishShoot = false;
     public bool ready=true;
     public bool isHit = false;
+    public GameObject destroyedTank;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +61,9 @@ public class PlayerShooting : MonoBehaviour
         else{
             ready=true;
         }
-        
+        if (GameObject.Find("BustedTank(Clone)")!=null){
+            isHit = true;
+        }
     }
     void Fire(){
         shootingAudio.clip = fireClip;
@@ -74,5 +77,4 @@ public class PlayerShooting : MonoBehaviour
         currentCharge = minCharge;
 
     }
-    
 }

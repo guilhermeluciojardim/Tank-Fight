@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private float maxRotation = 10f;
     public AudioClip moveAudio;
     private bool pressed = false;
-    
+    public bool isHit = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,14 +24,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {   
         Aim();
-
     }
 
+    
     //Function for aim the Turret
     private void Aim(){
         verticalAxis = Input.GetAxis("Vertical1");
         turret.transform.Rotate(Vector3.left, verticalAxis * turretSpeed * Time.deltaTime);
-        if ((Input.GetAxis("Vertical1")>0) && (!pressed)){
+        if ((Input.GetAxis("Vertical1")!=0) && (!pressed)){
             GetComponent<AudioSource>().clip = moveAudio;
             GetComponent<AudioSource>().volume = 0.35f;
             GetComponent<AudioSource>().Play();
