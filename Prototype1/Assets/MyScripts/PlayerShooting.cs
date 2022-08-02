@@ -20,8 +20,6 @@ public class PlayerShooting : MonoBehaviour
     public bool isTurn = false;
     public bool finishShoot = false;
     public bool ready=true;
-    public bool isHit = false;
-    public GameObject destroyedTank;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +30,7 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+     
         chargeSlider.value = minCharge;
         // If charge slider is at MAX, Fire the Shell
         if ((currentCharge >= maxCharge) && (!fired) && (ready)){
@@ -55,16 +54,16 @@ public class PlayerShooting : MonoBehaviour
         else if ((Input.GetKeyUp(KeyCode.Space)) && (!fired) && (ready)){
             Fire();
         }
+        // if the Shell explodes, ready the player for the next shoot
         if (GameObject.Find("Shell(Clone)")!=null){
             ready=false;
         }
         else{
             ready=true;
         }
-        if (GameObject.Find("BustedTank(Clone)")!=null){
-            isHit = true;
-        }
+        
     }
+    //Method for instantianting the shell according to the shot charge
     void Fire(){
         shootingAudio.clip = fireClip;
         shootingAudio.volume = 1f;

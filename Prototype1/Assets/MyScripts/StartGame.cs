@@ -36,27 +36,30 @@ public class StartGame : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        // If any player is hit, declares the winner
+        if ((GameObject.Find("BustedTank(Clone)")!=null) && (gameStarted)){
+            if (GameObject.Find("BustedTank(Clone)").transform.position.x == -23f){
+            FinishRound("Blue");
+            }               
+            else if (GameObject.Find("BustedTank(Clone)").transform.position.x == 23f){
+                            FinishRound("Red");
+            }
+        }
+        
         // Set the first random player
         if ((gameStarted) && (!setFirstPlayer)){
             SetFirstRandomPlayer();
         }
+        // change turns betwen players
         if (setFirstPlayer){
             if (player1Shooting.isTurn){
+                // Wait for the shoot to finish and for the player to get ready for another shoot before changing turns
                 if (player1Shooting.finishShoot){
                     if (player1Shooting.ready){
                         player1Shooting.finishShoot = false;
-                        if (player1Shooting.isHit){
-                            FinishRound("Red");
-                        }
-                        else if(player2Shooting.isHit){
-                            FinishRound("Blue");
-                        }
-                        else{
                             SetPlayer2();
                             ChangeWind();
-                        }
-                        
                     }
                 }
             }
@@ -64,23 +67,16 @@ public class StartGame : MonoBehaviour
                 if (player2Shooting.finishShoot){
                     if (player2Shooting.ready){
                         player2Shooting.finishShoot = false;
-                        if (player1Shooting.isHit){
-                            FinishRound("Red");
-                        }
-                        else if(player2Shooting.isHit){
-                            FinishRound("Blue");
-                        }
-                        else{
                             SetPlayer1();
                             ChangeWind();
-                        }
-                        
                     }
                 }
             }
         }
         
+        
     }
+    // Method to clean variables and objects, finish round and declare the winner
     void FinishRound(string winner){
         setTurn.text = winner + " Wins!!!";
         gameStarted=false;
@@ -91,20 +87,24 @@ public class StartGame : MonoBehaviour
         else{
             player1Shooting.gameObject.SetActive(false);
         }
+        GetComponent<AudioSource>().Stop();
         AudioSwap();
         GetComponent<AudioSource>().Play();
         GetComponent<AudioSource>().volume = 1.0f;
         restartButton.gameObject.SetActive(true);
 
     }
+    // method for restarting the game
     public void RestartScene(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    // Method for swap the audio betwen the engine and background music
     void AudioSwap(){
         swapAudio = GetComponent<AudioSource>().clip;
         GetComponent<AudioSource>().clip = otherAudio;
         otherAudio = swapAudio;
     }
+    // Method for change the wind direction and strengh
     void ChangeWind(){
         wind.strength = Random.Range(minWindStrength,maxWindStrength);
         wind.direction = new Vector3(Random.Range(-1,2),0,0);
@@ -121,7 +121,7 @@ public class StartGame : MonoBehaviour
             displayWind.value = 0.5f;
         }
     }
-
+    // Method for setting the first random player
     void SetFirstRandomPlayer(){
         ChangeWind();
         firstPlayerNumber = Random.Range(1,3);
@@ -133,6 +133,7 @@ public class StartGame : MonoBehaviour
         }
         setFirstPlayer = true;
     }
+    // Method for setting the game on button Start is pressed
     public void SetGame(){
         gameStarted = true;
         startButton.gameObject.SetActive(false);
@@ -140,6 +141,7 @@ public class StartGame : MonoBehaviour
         GetComponent<AudioSource>().Play();
         GetComponent<AudioSource>().volume = 0.3f;
     }
+    // Method for setting player 1 turn
     void SetPlayer1(){
             setTurn.text = "Blue Turn";
             player1Slider.gameObject.SetActive(true);
@@ -152,6 +154,7 @@ public class StartGame : MonoBehaviour
             player2Shooting.GetComponent<PlayerShooting>().enabled = false;
             
     }
+    // Method for setting player 2 turn
     void SetPlayer2(){
             setTurn.text = "Red Turn";
             player2Slider.gameObject.SetActive(true);
