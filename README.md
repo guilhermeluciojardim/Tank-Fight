@@ -16,11 +16,11 @@
 - [x] Create player controler and aim
 - [x] Create firing system
 - [x] Create wind system
-- [ ] Manage health system
+- [x] Manage health system
 - [x] Create player 1 e 2 control
 - [x] Create Game Menu
-- [ ] Fix last bugs
-- [ ] Project Optimization
+- [x] Fix last bugs
+- [x] Project Optimization
 - [ ] Build Project
 
 ##  🎮 When the game get playable, the link will be provided here..
