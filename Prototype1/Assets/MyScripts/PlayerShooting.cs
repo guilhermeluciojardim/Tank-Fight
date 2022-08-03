@@ -67,7 +67,7 @@ public class PlayerShooting : MonoBehaviour
     void Fire(){
         shootingAudio.clip = fireClip;
         shootingAudio.volume = 1f;
-        shootingAudio.Play();
+        GetComponent<AudioSource>().Play(); // shootingAudio.Play();
         fired=true;
         finishShoot=true;
         Rigidbody shellInst =

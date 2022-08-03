@@ -67,6 +67,7 @@ public class StartGame : MonoBehaviour
             }
             else{
                 if (player2Shooting.finishShoot){
+                    
                     if (player2Shooting.ready){
                         player2Shooting.finishShoot = false;
                             SetPlayer1();
@@ -148,6 +149,7 @@ public class StartGame : MonoBehaviour
     public void SetGame(){
         gameStarted = true;
         startButton.gameObject.SetActive(false);
+        GetComponent<AudioSource>().Stop();
         AudioSwap();
         GetComponent<AudioSource>().Play();
         GetComponent<AudioSource>().volume = 0.3f;
