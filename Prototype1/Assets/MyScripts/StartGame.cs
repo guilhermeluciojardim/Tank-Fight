@@ -23,10 +23,12 @@ public class StartGame : MonoBehaviour
     public AudioClip otherAudio;
     public AudioClip swapAudio;
     public Button startButton;
-    public Button restartButton;
+    public Button nextButton;
     public bool gameStarted = false;
     public bool setFirstPlayer = false;
     public bool gameEnds=false;
+    public int currentLevel;
+    public string nextLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -72,32 +74,41 @@ public class StartGame : MonoBehaviour
                     }
                 }
             }
-        }
-        
-        
+        } 
     }
     // Method to clean variables and objects, finish round and declare the winner
     void FinishRound(string winner){
-        setTurn.text = winner + " Wins!!!";
         gameStarted=false;
         setFirstPlayer=false;
         if (winner == "Blue"){
             player2Shooting.gameObject.SetActive(false);
+            setTurn.color = Color.blue;
         }
         else{
             player1Shooting.gameObject.SetActive(false);
+            setTurn.color = Color.red;
         }
+        setTurn.text = winner + " Wins!!!";
         GetComponent<AudioSource>().Stop();
         AudioSwap();
         GetComponent<AudioSource>().Play();
         GetComponent<AudioSource>().volume = 1.0f;
-        restartButton.gameObject.SetActive(true);
+        nextButton.gameObject.SetActive(true);
+    }
+    
+    // method for setting the next scene
+    public void NextScene(){
+        currentLevel = int.Parse(SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length-1));
+        currentLevel++;
+        nextLevel = currentLevel.ToString();
+        nextLevel = "Level - " + nextLevel;
+        if (currentLevel <= 3){
+            SceneManager.LoadScene(nextLevel);
+        }
+        
+    }
+        
 
-    }
-    // method for restarting the game
-    public void RestartScene(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
     // Method for swap the audio betwen the engine and background music
     void AudioSwap(){
         swapAudio = GetComponent<AudioSource>().clip;
@@ -144,6 +155,7 @@ public class StartGame : MonoBehaviour
     // Method for setting player 1 turn
     void SetPlayer1(){
             setTurn.text = "Blue Turn";
+            setTurn.color = Color.blue;
             player1Slider.gameObject.SetActive(true);
             player2Slider.gameObject.SetActive(false);
             player1Shooting.isTurn = true;
@@ -157,6 +169,7 @@ public class StartGame : MonoBehaviour
     // Method for setting player 2 turn
     void SetPlayer2(){
             setTurn.text = "Red Turn";
+            setTurn.color = Color.red;
             player2Slider.gameObject.SetActive(true);
             player1Slider.gameObject.SetActive(false);
             player2Shooting.isTurn = true;
