@@ -8,7 +8,7 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
-> This is a game in unity 3D where tanks fight each other until only one survive
+> In this project, I created scripts using Tanks Assets for generating a two player game where each tank takes turns and tries to hit each in a 3 - turn battle. But wind seems to influence on shell direction to make this war more fun. Are you up to the challenge? Call your friend nearby for a quick tank fight!
 
 ### Next ajusts and improvements
 
@@ -21,11 +21,11 @@
 - [x] Create Game Menu
 - [x] Fix last bugs
 - [x] Project Optimization
-- [ ] Build Project
+- [x] Build Project
 
-##  🎮 When the game get playable, the link will be provided here..
+##  🎮 Ready for Play!! Have Fun!
 
-https://
+https://play.unity.com/mg/other/webgl-builds-229571
 
 ## 💻 System Requirements
 
