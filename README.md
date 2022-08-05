@@ -8,6 +8,9 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
+<img alt="Git" src="https://guilhermeluciojardim.com.br/wp-content/uploads/2022/08/Captura-de-tela-2022-08-05-08.42.34-1024x576.png" width=300 height=300 />
+
+
 > In this project, I created scripts using Tanks Assets for generating a two player game where each tank takes turns and tries to hit each in a 3 - turn battle. But wind seems to influence on shell direction to make this war more fun. Are you up to the challenge? Call your friend nearby for a quick tank fight!
 
 ### Next ajusts and improvements
